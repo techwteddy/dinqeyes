@@ -65,7 +65,6 @@ export default function WebhookLogs() {
 
   useEffect(() => {
     fetchLogs();
-    // Auto-refresh every 5 seconds
     const interval = setInterval(fetchLogs, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -77,15 +76,15 @@ export default function WebhookLogs() {
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Approved":
-        return "bg-green-500";
+        return "bg-emerald-500";
       case "Declined":
         return "bg-red-500";
       case "In Review":
         return "bg-yellow-500";
       case "In Progress":
-        return "bg-blue-500";
+        return "bg-[#6C5CE7]";
       default:
-        return "bg-gray-500";
+        return "bg-white/30";
     }
   };
 
@@ -102,9 +101,11 @@ export default function WebhookLogs() {
       <CardHeader>
         <div className="flex justify-between items-center">
           <div>
-            <CardTitle className="text-xl">Webhook Logs</CardTitle>
+            <CardTitle className="text-xl text-white">
+              Intelligence webhooks
+            </CardTitle>
             <CardDescription>
-              Recent webhooks received from Didit ({logs.length} total)
+              Recent webhooks received by DinqEyes ({logs.length} total)
             </CardDescription>
           </div>
           <div className="flex gap-2">
@@ -123,7 +124,7 @@ export default function WebhookLogs() {
               variant="outline"
               size="sm"
               onClick={clearLogs}
-              className="text-red-500 hover:text-red-600"
+              className="text-red-400 hover:text-red-300"
             >
               <Trash2 className="h-4 w-4 mr-1" />
               Clear
@@ -133,10 +134,10 @@ export default function WebhookLogs() {
       </CardHeader>
       <CardContent>
         {logs.length === 0 ? (
-          <div className="text-center py-8 text-gray-500">
+          <div className="text-center py-8 text-white/70">
             <p>No webhooks received yet.</p>
-            <p className="text-sm mt-2">
-              Complete a verification to see webhooks here.
+            <p className="text-sm mt-2 text-white/50">
+              Complete a verification to see intelligence events here.
             </p>
           </div>
         ) : (
@@ -145,14 +146,14 @@ export default function WebhookLogs() {
               {logs.map((log) => (
                 <div
                   key={log.id}
-                  className="border rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                  className="border border-white/10 rounded-lg p-4 hover:bg-white/5 transition-colors"
                 >
                   <div className="flex justify-between items-start">
                     <div className="flex items-center gap-3">
                       {log.signatureValid ? (
-                        <CheckCircle className="h-5 w-5 text-green-500 flex-shrink-0" />
+                        <CheckCircle className="h-5 w-5 text-emerald-400 flex-shrink-0" />
                       ) : (
-                        <XCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
+                        <XCircle className="h-5 w-5 text-red-400 flex-shrink-0" />
                       )}
                       <div>
                         <div className="flex items-center gap-2">
@@ -162,7 +163,10 @@ export default function WebhookLogs() {
                             {log.status}
                           </Badge>
                           {log.signatureMethod && (
-                            <Badge variant="outline" className="text-xs">
+                            <Badge
+                              variant="outline"
+                              className="text-xs border-white/20 text-white/70"
+                            >
                               {log.signatureMethod} signature
                             </Badge>
                           )}
@@ -172,14 +176,14 @@ export default function WebhookLogs() {
                             </Badge>
                           )}
                         </div>
-                        <p className="text-sm text-gray-500 mt-1">
+                        <p className="text-sm text-white/70 mt-1">
                           Session: {log.sessionId.substring(0, 20)}...
                         </p>
-                        <p className="text-xs text-gray-400">
+                        <p className="text-xs text-white/50">
                           {formatDate(log.createdAt)}
                         </p>
                         {log.errorMessage && (
-                          <p className="text-xs text-red-500 mt-1">
+                          <p className="text-xs text-red-400 mt-1">
                             {log.errorMessage}
                           </p>
                         )}
@@ -191,6 +195,7 @@ export default function WebhookLogs() {
                           variant="ghost"
                           size="sm"
                           onClick={() => setSelectedLog(log)}
+                          className="text-white/70 hover:text-white hover:bg-white/10"
                         >
                           <Eye className="h-4 w-4 mr-1" />
                           View
@@ -198,10 +203,10 @@ export default function WebhookLogs() {
                       </DialogTrigger>
                       <DialogContent className="max-w-3xl max-h-[80vh]">
                         <DialogHeader>
-                          <DialogTitle className="flex items-center gap-2">
-                            Webhook Details
+                          <DialogTitle className="flex items-center gap-2 text-white">
+                            Webhook details
                             {log.signatureValid ? (
-                              <Badge className="bg-green-500">Valid</Badge>
+                              <Badge className="bg-emerald-500">Valid</Badge>
                             ) : (
                               <Badge variant="destructive">Invalid</Badge>
                             )}
@@ -209,29 +214,31 @@ export default function WebhookLogs() {
                         </DialogHeader>
                         <div className="space-y-4">
                           <div>
-                            <h4 className="font-semibold mb-2">
-                              Signature Verification
+                            <h4 className="font-semibold mb-2 text-white">
+                              Signature verification
                             </h4>
-                            <div className="bg-gray-100 rounded p-3 text-sm">
+                            <div className="bg-white/5 border border-white/10 rounded p-3 text-sm text-white/80">
                               <p>
                                 <strong>Valid:</strong>{" "}
                                 {log.signatureValid ? "Yes ✓" : "No ✗"}
                               </p>
                               <p>
-                                <strong>Method Used:</strong>{" "}
+                                <strong>Method used:</strong>{" "}
                                 {log.signatureMethod || "None"}
                               </p>
                               {log.errorMessage && (
-                                <p className="text-red-600">
+                                <p className="text-red-400">
                                   <strong>Error:</strong> {log.errorMessage}
                                 </p>
                               )}
                             </div>
                           </div>
                           <div>
-                            <h4 className="font-semibold mb-2">Headers</h4>
+                            <h4 className="font-semibold mb-2 text-white">
+                              Headers
+                            </h4>
                             <ScrollArea className="h-[100px]">
-                              <pre className="bg-gray-900 text-green-400 rounded p-3 text-xs overflow-x-auto">
+                              <pre className="bg-[#010812] border border-white/10 text-emerald-400 rounded p-3 text-xs overflow-x-auto">
                                 {log.headers
                                   ? formatJson(log.headers)
                                   : "No headers"}
@@ -239,11 +246,11 @@ export default function WebhookLogs() {
                             </ScrollArea>
                           </div>
                           <div>
-                            <h4 className="font-semibold mb-2">
+                            <h4 className="font-semibold mb-2 text-white">
                               Payload (JSON)
                             </h4>
                             <ScrollArea className="h-[300px]">
-                              <pre className="bg-gray-900 text-green-400 rounded p-3 text-xs overflow-x-auto">
+                              <pre className="bg-[#010812] border border-white/10 text-emerald-400 rounded p-3 text-xs overflow-x-auto">
                                 {formatJson(log.rawPayload)}
                               </pre>
                             </ScrollArea>

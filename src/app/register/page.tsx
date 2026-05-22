@@ -16,6 +16,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { AlertCircle, Info } from "lucide-react";
+import { BrandHeader } from "@/components/brand-header";
 
 export default function Register() {
   const router = useRouter();
@@ -88,14 +89,16 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#010812] py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
-        <CardHeader>
-          <CardTitle className="text-2xl font-bold text-center">
-            Create your account
+        <CardHeader className="space-y-4">
+          <BrandHeader />
+          <CardTitle className="text-xl font-semibold text-center text-white">
+            Join DinqEyes
           </CardTitle>
           <CardDescription className="text-center">
-            Enter your details to register for a new account
+            Create your account to start verifying identities with intelligence
+            built in
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -169,13 +172,13 @@ export default function Register() {
           </form>
         </CardContent>
         <CardFooter>
-          <p className="text-sm text-center w-full">
+          <p className="text-sm text-center w-full text-white/70">
             Already have an account?{" "}
             <Link
               href="/signin"
-              className="font-medium text-primary hover:underline"
+              className="font-medium text-[#6C5CE7] hover:underline"
             >
-              Sign in
+              Sign in to DinqEyes
             </Link>
           </p>
         </CardFooter>

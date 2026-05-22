@@ -20,8 +20,9 @@ function CallbackContent() {
   }, [router, update]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
-      <p>Processing verification result...</p>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#010812] gap-2">
+      <p className="text-lg font-semibold text-white">DinqEyes</p>
+      <p className="text-white/70">Processing identity verification...</p>
     </div>
   );
 }

@@ -1,8 +1,15 @@
-// src/app/layout.tsx
-"use client";
-
-import { SessionProvider } from "next-auth/react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Providers } from "./providers";
 import "./globals.css";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "DinqEyes — Identity Intelligence. Instantly.",
+  description:
+    "DinqEyes — the identity intelligence agent. Verify identities and monitor webhooks in real time.",
+};
 
 export default function RootLayout({
   children,
@@ -11,8 +18,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <SessionProvider>{children}</SessionProvider>
+      <body className={inter.className}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -30,6 +30,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import WebhookLogs from "@/components/webhook-logs";
+import { BrandHeader } from "@/components/brand-header";
 
 export default function Home() {
   const { data: session, update } = useSession();
@@ -88,13 +89,16 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary py-6 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#010812] py-6 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-4xl">
-        <Card className="shadow-lg">
+        <div className="mb-6">
+          <BrandHeader />
+        </div>
+        <Card>
           <CardHeader className="space-y-2">
-            <div className="flex justify-between items-center">
-              <CardTitle className="text-3xl font-bold">
-                Welcome, {session?.user?.name || session?.user?.email}!
+            <div className="flex justify-between items-center gap-4">
+              <CardTitle className="text-2xl font-bold text-white">
+                Welcome, {session?.user?.name || session?.user?.email}
               </CardTitle>
               {session?.user?.isVerified !== undefined && (
                 <Badge
@@ -106,27 +110,28 @@ export default function Home() {
               )}
             </div>
             <CardDescription>
-              Manage your verification status and session here.
+              Run identity verification sessions and monitor intelligence
+              webhooks in real time.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Show verified success message with reset option */}
             {session?.user?.isVerified && (
-              <Alert className="border-green-500 bg-green-50">
-                <CheckCircle className="h-4 w-4 text-green-500" />
-                <AlertTitle className="text-green-700">
-                  Verification Complete!
+              <Alert className="border-emerald-500/40 bg-emerald-500/10">
+                <CheckCircle className="h-4 w-4 text-emerald-400" />
+                <AlertTitle className="text-emerald-200">
+                  Identity verified
                 </AlertTitle>
-                <AlertDescription className="text-green-600">
-                  Your identity has been verified. To test webhooks again, reset
-                  your verification status below.
+                <AlertDescription className="text-emerald-200/80">
+                  DinqEyes confirmed this identity. Reset verification below to
+                  test webhooks again.
                 </AlertDescription>
               </Alert>
             )}
 
             <div className="space-y-4">
-              <Alert>
-                <AlertTitle>Integration Options</AlertTitle>
+              <Alert className="border-white/10 bg-white/5 backdrop-blur-xl">
+                <AlertTitle className="text-white">Integration options</AlertTitle>
                 <AlertDescription>
                   <p className="mb-2">
                     Choose the integration method that works best for your app:
@@ -155,9 +160,9 @@ export default function Home() {
                   id="iframeToggle"
                   checked={isIframe}
                   onChange={(e) => setIsIframe(e.target.checked)}
-                  className="form-checkbox h-5 w-5 text-primary"
+                  className="form-checkbox h-5 w-5 accent-[#6C5CE7]"
                 />
-                <label htmlFor="iframeToggle" className="text-sm">
+                <label htmlFor="iframeToggle" className="text-sm text-white/70">
                   Use iframe method
                 </label>
               </div>

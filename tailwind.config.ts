@@ -10,6 +10,10 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+  			dinq: {
+  				navy: '#010812',
+  				purple: '#6C5CE7',
+  			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

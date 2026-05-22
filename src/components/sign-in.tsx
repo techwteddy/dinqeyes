@@ -17,6 +17,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { AlertCircle, CheckCircle2 } from "lucide-react";
+import { BrandHeader } from "@/components/brand-header";
 
 // Map NextAuth error codes to user-friendly messages
 function getErrorMessage(error: string): string {
@@ -114,12 +115,13 @@ export default function SignInForm() {
 
   return (
     <Card className="w-full max-w-md">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">
-          Sign in to your account
+      <CardHeader className="space-y-4">
+        <BrandHeader />
+        <CardTitle className="text-xl font-semibold text-center text-white">
+          Sign in to DinqEyes
         </CardTitle>
         <CardDescription className="text-center">
-          Enter your email and password to access your account
+          Access your identity intelligence dashboard
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -131,9 +133,9 @@ export default function SignInForm() {
           </Alert>
         )}
         {success && (
-          <Alert className="mb-4 border-green-500 bg-green-50 text-green-700">
-            <CheckCircle2 className="h-4 w-4 text-green-500" />
-            <AlertTitle>Success</AlertTitle>
+          <Alert className="mb-4 border-emerald-500/40 bg-emerald-500/10 text-emerald-200">
+            <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+            <AlertTitle className="text-emerald-200">Success</AlertTitle>
             <AlertDescription>{success}</AlertDescription>
           </Alert>
         )}
@@ -176,13 +178,13 @@ export default function SignInForm() {
         </form>
       </CardContent>
       <CardFooter>
-        <p className="text-sm text-center w-full">
+        <p className="text-sm text-center w-full text-white/70">
           {"Don't have an account? "}
           <Link
             href="/register"
-            className="font-medium text-primary hover:underline"
+            className="font-medium text-[#6C5CE7] hover:underline"
           >
-            Register
+            Create your DinqEyes account
           </Link>
         </p>
       </CardFooter>
